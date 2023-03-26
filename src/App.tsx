@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import React from 'react';
+import { useState } from "react";
+import "./style/App.scss";
+import booksFromServer from './api/booksFromServer.json';
 
-function App() {
+import Button from '@mui/material/Button';
+import { FormControl } from './Form';
+import { EditForm } from './EditForm';
+import { DataGridComp } from './DataGridComp';
+
+import { RouterProvider } from 'react-router-dom';
+
+import { Book } from './types/Book';
+
+export const App = () => {
+
+  const [allBooks, setAllBooks] = useState<Book[]>(booksFromServer);
+  const [selectedRow, setSelectedRow] = useState<Book | null>(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    // <RouterProvider router={routerConst} />
+    <>
+      <div className="booklist" style={{ height: 500, width: '100%' }}>
+        <Button 
+          variant="contained"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+          Add Book
+        </Button>
 
-export default App;
+          <DataGridComp
+            allBooks={allBooks}
+            setSelectedRow={setSelectedRow}
+          />
+
+          {selectedRow && (
+              <EditForm
+                selectedRow={selectedRow}
+                setSelectedRow={setSelectedRow}
+              />
+            )}
+      </div>
+
+      <div className="form">
+        <FormControl />
+      </div>
+    </>
+  )
+};
+

@@ -1,0 +1,20 @@
+[  
+    {    
+        "id": 1,    
+        "name": "Oruel book1",    
+        "author": "Gorge Oruell",    
+        "published": 1946  
+    },  
+    {    
+        "id": 2,    
+        "name": "Gamlet",    
+        "author": "William Shekspire",    
+        "published": 1810  
+    }, 
+    {    
+        "id": 3,    
+        "name": "Gamlet",    
+        "author": "William Shekspire",    
+        "published": 1810  
+    } 
+]
