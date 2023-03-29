@@ -38,6 +38,7 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/books" />} />
+      <Route path="/book-library" element={<Navigate to="/books" />} />
       <Route path="/books">
         <Route
           index
