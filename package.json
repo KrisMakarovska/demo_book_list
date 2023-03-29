@@ -1,7 +1,7 @@
 {
-  "name": "books-library-app",
+  "name": "books",
   "version": "0.1.0",
-  "homepage": "https://KrisMakarovska.github.io",
+  "homepage": "https://KrisMakarovska.github.io/books",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
