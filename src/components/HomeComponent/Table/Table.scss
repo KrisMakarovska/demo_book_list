@@ -1,0 +1,121 @@
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px;
+
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
+
+  &__rows:hover {
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  &__header {
+    background-color: #e7dbd4;
+  }
+}
+
+.table__column,
+.table__row {
+  text-align: left;
+  height: 50px;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+
+  font-weight: 700;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.table__column--name,
+.table__column--author,
+.table__row--name {
+  width: 23%;
+}
+
+.table__column--name,
+.table__row--name {
+  padding-left: 1rem;
+}
+
+.table__column--edit {
+  text-align: center;
+}
+
+.table__row--author {
+  width: 23%;
+}
+
+.table__column--published,
+.table__row--published {
+  width: 15%;
+}
+
+.table__column--view,
+.table__column--delete {
+  text-align: center;
+  width: 9%;
+}
+
+.table__column--view,
+.table__row--eye {
+  width: 9%;
+}
+
+.table__row--eye,
+.table__row--delete,
+.table__row--edit {
+  cursor: pointer;
+  text-align: center;
+
+  @media (max-width: 760px) {
+    right: 43%;
+    border-bottom: none;
+  }
+}
+
+.text-field {
+  border: none;
+  background-color: #fff;
+}
+
+.icon:visited {
+  color: inherit;
+}
+
+@media (max-width: 760px) {
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 300px;
+  }
+  .table tr {
+    margin-bottom: 15px;
+  }
+
+  .table td {
+    text-align: right;
+    text-align: right;
+    position: relative;
+  }
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    text-align: left;
+  }
+}

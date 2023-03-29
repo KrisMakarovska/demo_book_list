@@ -1,0 +1,13 @@
+@import "./components/HomeComponent/Home.scss";
+@import "./components/HomeComponent/Table/Table.scss";
+@import "./components/HomeComponent/AddButton/AddButton.scss";
+@import "./components/AddForm/AddForm.scss";
+@import "./components/BookView/BookView.scss";
+@import "./components/HomeComponent/Footer/Footer.scss";
+
+body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
