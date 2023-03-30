@@ -11,6 +11,7 @@ Technologies:
 * Typescript,
 * HTML,
 * CSS, SCSS
+* Material UI
  
 :small_orange_diamond: click on Add button to open add form;    
 :small_orange_diamond: fill in empty fields and submit a new book to the list;    
