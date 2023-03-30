@@ -1,11 +1,10 @@
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import { BackArrow } from "../BackArrow/BackArrow";
-
-import { Book } from "../../types/Book";
 import { useEffect, useState } from "react";
+import Paper from "@mui/material/Paper";
+import { BackArrow } from "../BackArrow/BackArrow";
 import { ValidationModal } from "../ValidationModal/ValidationModal";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
+import { Book } from "../../types/Book";
 
 type Props = {
   actionBooks: (a: string, B: Book) => void;
@@ -106,15 +105,13 @@ export const EditForm = ({ actionBooks }: Props) => {
                 value={published}
                 onChange={handleAPublishedChange}
               />
-
-              <Button
-                variant="contained"
-                color="primary"
+              <button 
+                className="edit-button"
                 type="submit"
                 disabled={disabledButton}
               >
                 Save
-              </Button>
+              </button>
             </form>
           </Paper>
         </div>

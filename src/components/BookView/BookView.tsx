@@ -1,6 +1,6 @@
-import { Button, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import { BackArrow } from "../BackArrow/BackArrow";
-import bookview from '../../images/bookview.jpg';
+import bookview from "../../images/bookview.jpg";
 
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
@@ -16,21 +16,25 @@ export const BookView = () => {
   return (
     <div className="container">
       <div className="form">
-        <Paper className="form-viewbook">
-          <NavLink to={"/books#bottom"} className="form__arrow">
+        <Paper className="viewbook">
+          <NavLink to={"/books#bottom"} className="form__arrow viewbook__arrow">
             <BackArrow />
           </NavLink>
 
-          <form className="form__inputs" onSubmit={handleFormSubmit}>
+          <form
+            className="form__inputs viewbook__inputs"
+            onSubmit={handleFormSubmit}
+          >
+            <h2 className="viewbook__title">Book Details:</h2>
             <input
-              className="form__field"
+              className="form__field viewbook__field"
               name="name"
               disabled
               value={book.name}
             />
 
             <input
-              className="form__field"
+              className="form__field viewbook__field"
               type="text"
               name="author"
               disabled
@@ -38,22 +42,18 @@ export const BookView = () => {
             />
 
             <input
-              className="form__field"
+              className="form__field viewbook__field"
               type="number"
               name="published"
               disabled
               value={book.published}
             />
-
-            <Button variant="contained" color="primary" type="submit">
+            <button className="edit-button viewbook__button" type="submit">
               Edit
-            </Button>
+            </button>
           </form>
-          <img
-            src={bookview}
-            alt={book.name}
-            className="form-viewbook__image"
-          />
+
+          <img src={bookview} alt={book.name} className="viewbook__image" />
         </Paper>
       </div>
     </div>

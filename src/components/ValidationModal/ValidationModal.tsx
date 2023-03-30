@@ -23,9 +23,12 @@ export const ValidationModal = ({ setValidationModal }: Props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleConfirm} variant="contained" color="primary">
+        {/* <Button onClick={handleConfirm} variant="contained" color="primary">
           OK
-        </Button>
+        </Button> */}
+        <button className="validation-button" type="submit" onClick={handleConfirm}>
+          OK
+        </button>
       </DialogActions>
     </Dialog>
   );

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 import { Paper } from "@mui/material";
-import Button from "@mui/material/Button";
 import { BackArrow } from "../BackArrow/BackArrow";
+import { ValidationModal } from "../ValidationModal/ValidationModal";
 
 import { Book } from "../../types/Book";
-import { useNavigate } from "react-router";
-import { ValidationModal } from "../ValidationModal/ValidationModal";
-import { NavLink } from "react-router-dom";
 
 type Props = {
   actionBooks: (a: string, b: Book) => void;
@@ -37,7 +36,7 @@ export const AddForm = ({ actionBooks }: Props) => {
     if (+formData.published >= 1900 && +formData.published <= 2023) {
       actionBooks("add", formData);
       setFormData({
-        id: Math.random(),
+        id: randomNumber,
         name: "",
         author: "",
         published: "",
@@ -90,10 +89,9 @@ export const AddForm = ({ actionBooks }: Props) => {
                 value={formData.published}
                 onChange={handleInputChange}
               />
-
-              <Button variant="contained" color="primary" type="submit">
+              <button className="form__button" type="submit">
                 Save
-              </Button>
+              </button>
             </form>
           </Paper>
         </div>

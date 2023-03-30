@@ -1,20 +1,28 @@
-.form-viewbook {
+.viewbook {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  min-width: 300px;
 
-  &__inputs {
-    margin-right: 15px;
+  &__title {
+    margin-left: 10px;
+
+    font-size: 26px;
+    font-family: inherit;
+    font-weight: bold;
   }
 
   &__arrow {
     padding: 10px;
+    gap: -20px;
   }
 
   &__field {
-    min-width: 200px;
-    margin-right: 10px;
+    border: none;
+
+    font-size: 18px;
+    font-family: inherit;
+    font-style: italic;
   }
 
   &__image {
@@ -23,5 +31,10 @@
     min-width: 100px;
     height: 100%;
     border-radius: 7px;
+  }
+
+  &__button {
+    margin-left: 10px;
+    text-align: center;
   }
 }

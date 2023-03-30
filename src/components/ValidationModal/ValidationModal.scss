@@ -1,8 +1,9 @@
-.addbutton {
-  padding: 14px 16px;
+.validation-button {
+  padding: 10px 20px;
   margin-bottom: 5px;
+  margin-right: 5px;
   
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
 
@@ -14,8 +15,6 @@
   background-color: #a99d84;
   color: #f2f2f2;
 
-
-
   &:hover {
     background-color: #6a6253;
   }
@@ -24,4 +23,3 @@
     background-color: #6a6253;
   }
 }
-

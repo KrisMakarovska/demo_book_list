@@ -22,7 +22,6 @@
   margin-right: 10px;
 
   &__arrow {
-    padding: 5px;
     align-self: flex-start;
   }
 
@@ -63,5 +62,30 @@
     color: #333;
     background-color: #fff;
     transition: border-color 0.3s ease-in-out;
+  }
+
+  &__button {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #a99d84;
+    color: #f2f2f2;
+
+    &:hover {
+      background-color: #6a6253;
+    }
+
+    &:active {
+      background-color: #6a6253;
+    }
   }
 }

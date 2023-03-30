@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Dialog,
   DialogActions,
@@ -9,8 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { Book } from "../../../types/Book";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+
 
 type Props = {
   booksToShow: Book[];
@@ -57,14 +58,18 @@ export const Table = ({ booksToShow, actionBooks }: Props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseModal}>Cancel</Button>
-            <Button
+            <button
+              className="table__modal table__modal--cancel"
+              onClick={handleCloseModal}
+            >
+              Cancel
+            </button>
+            <button
+              className="table__modal table__modal--confirm"
               onClick={handleConfirmModal}
-              variant="contained"
-              color="primary"
             >
               Confirm
-            </Button>
+            </button>
           </DialogActions>
         </Dialog>
       )}
