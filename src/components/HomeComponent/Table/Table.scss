@@ -1,7 +1,6 @@
 .table {
   border-collapse: collapse;
-  max-width: 100%;
-  width: max-content;
+  // width: max-content;
   margin: 10px;
 
   background-color: #fff;
@@ -88,7 +87,7 @@
   &__column--author,
   &__row--name,
   &__row--author {
-    width: 35%;
+    width: 200px;
   }
 
   &__row--name {
@@ -141,7 +140,7 @@
   .table__row--published {
     display: block;
     width: 350px;
-    padding-right: 15px;
+    padding-right: 25px;
     text-align: right;
     line-height: 40px;
   }
@@ -166,7 +165,7 @@
     content: attr(data-label) ": ";
 
     position: absolute;
-    left: 20px;
+    left: 25px;
     text-align: left;
 
     font-weight: bold;
