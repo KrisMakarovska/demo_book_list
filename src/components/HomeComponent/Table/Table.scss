@@ -140,7 +140,7 @@
   .table__row--published {
     display: block;
     width: 350px;
-    padding-right: 25px;
+    padding-right: 35px;
     text-align: right;
     line-height: 40px;
   }
@@ -153,8 +153,8 @@
   .table__row--delete,
   .table__row--view {
     display: inline-block;
-    padding: 5px;
-    width: 90px;
+    padding-top: 14px;
+    width: 95px;
     text-align: right;
     border-bottom: none;
   }
@@ -165,7 +165,7 @@
     content: attr(data-label) ": ";
 
     position: absolute;
-    left: 25px;
+    left: 35px;
     text-align: left;
 
     font-weight: bold;
