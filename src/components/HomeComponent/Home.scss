@@ -35,10 +35,14 @@
 .scroll-icon {
   position: absolute;
   bottom: 70px;
-  left: 50%;
+  right: 49%;
   color: #fff;
   font-size: 2rem;
   animation: scroll-down 1s ease-in-out infinite;
+
+  @media (max-width: 600px) {
+    bottom: 130px;
+  }
 }
 
 @keyframes scroll-down {
