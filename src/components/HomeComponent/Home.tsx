@@ -4,8 +4,8 @@ import { AddButton } from "./AddButton/addButton";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type Props = {
   actionBooks: (a: string, b: Book) => void;
@@ -14,7 +14,7 @@ type Props = {
 
 export const Home = ({ actionBooks, booksToShow }: Props) => {
   const myRef = useRef<HTMLDivElement>(null);
-  
+
   const location = useLocation();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const Home = ({ actionBooks, booksToShow }: Props) => {
 
   const handleScrollClick = () => {
     if (myRef.current !== null) {
-      nextSectionRef.current?.scrollIntoView({behavior: "smooth"});
+      nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -36,10 +36,10 @@ export const Home = ({ actionBooks, booksToShow }: Props) => {
       <div className="header">
         <h1 className="header__title">WELCOME TO THE ONLINE LIBRARY</h1>
         <a href="#scroll-down" onClick={handleScrollClick}>
-          <FontAwesomeIcon 
+          <FontAwesomeIcon
             className="scroll-icon"
             icon={faChevronDown}
-            size='3x'
+            size="3x"
           />
         </a>
       </div>
