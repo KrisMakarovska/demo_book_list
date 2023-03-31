@@ -167,8 +167,6 @@
 
     position: absolute;
     left: 20px;
-
-    // padding-left: 15px;
     text-align: left;
 
     font-weight: bold;
@@ -179,12 +177,13 @@
   .table__row--delete {
     position: absolute;
     top: 158px;
-    left: 290px;
+    left: 275px;
+    text-align: right;
   }
 
   .table__row--view {
     position: absolute;
-    left: 40%;
-    top: 79%;
+    left: 150px;
+    top: 160px;
   }
 }
