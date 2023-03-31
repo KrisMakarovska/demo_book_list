@@ -145,17 +145,17 @@
     line-height: 40px;
   }
 
-  .table__row--edit {
-    line-height: 35px;
-  }
+  // .table__row--edit {
+  //   line-height: 35px;
+  // }
 
   .table__row--edit,
   .table__row--delete,
   .table__row--view {
-    display: block;
+    display: inline-block;
     padding: 5px;
-    width: 60px;
-    text-align: center;
+    width: 90px;
+    text-align: right;
     border-bottom: none;
   }
 
@@ -173,16 +173,16 @@
     color: #333;
   }
 
-  .table__row--delete {
-    position: absolute;
-    top: 158px;
-    left: 275px;
-    text-align: right;
-  }
+  // .table__row--delete {
+  //   position: absolute;
+  //   top: 158px;
+  //   left: 275px;
+  //   text-align: right;
+  // }
 
-  .table__row--view {
-    position: absolute;
-    left: 150px;
-    top: 160px;
-  }
+  // .table__row--view {
+  //   position: absolute;
+  //   left: 150px;
+  //   top: 160px;
+  // }
 }
