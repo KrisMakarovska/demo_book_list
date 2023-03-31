@@ -166,9 +166,9 @@
     content: attr(data-label) ": ";
 
     position: absolute;
-    left: 15px;
+    left: 20px;
 
-    padding-left: 15px;
+    // padding-left: 15px;
     text-align: left;
 
     font-weight: bold;
@@ -178,8 +178,8 @@
 
   .table__row--delete {
     position: absolute;
-    top: 78%;
-    left: 83%;
+    top: 158px;
+    left: 290px;
   }
 
   .table__row--view {
