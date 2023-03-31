@@ -1,4 +1,5 @@
 .header {
+  position: relative;
   background-image: url(../../images/intro.png);
   height: 100vh;
   width: 100%;
@@ -28,5 +29,26 @@
 
   &__addbutton {
     text-decoration: none;
+  }
+}
+
+.scroll-icon {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  color: #fff;
+  font-size: 2rem;
+  animation: scroll-down 1s ease-in-out infinite;
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
