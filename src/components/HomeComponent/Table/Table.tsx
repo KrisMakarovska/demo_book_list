@@ -12,7 +12,6 @@ import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { Book } from "../../../types/Book";
 
-
 type Props = {
   booksToShow: Book[];
   actionBooks: (a: string, b: Book) => void;
@@ -84,50 +83,32 @@ export const Table = ({ booksToShow, actionBooks }: Props) => {
           <th className="table__column table__column--view">View Book</th>
         </tr>
       </thead>
+
       <tbody>
         {booksToShow.map((book: Book) => (
           <tr key={book.id} className="table__rows">
-            <td className="table__row table__row--name" data-label="Name">
-              <input
-                className="text-field"
-                type="text"
-                defaultValue={book.name}
-                disabled
-              />
+            <td className="table__row--name" data-label="Name">
+              {book.name}
             </td>
-            <td className="table__row table__row--author" data-label="Author">
-              <input
-                className="text-field"
-                type="text"
-                value={book.author}
-                disabled
-              />
+            <td className="table__row--author" data-label="Author">
+              {book.author}
             </td>
-            <td
-              className="table__row table__row--published"
-              data-label="Published"
-            >
-              <input
-                className="text-field"
-                type="text"
-                value={book.published}
-                disabled
-              />
+            <td className="table__row--published" data-label="Published">
+              {book.published}
             </td>
-            <td className="table__row table__row--edit">
+            <td className="table__row--edit">
               <FontAwesomeIcon
                 icon={faEdit}
                 onClick={() => handleEditBook(book)}
               />
             </td>
-            <td className="table__row table__row--delete">
+            <td className="table__row--delete">
               <FontAwesomeIcon
                 icon={faTrash}
                 onClick={() => handleDeleteClick(book)}
               />
             </td>
-
-            <td className="table__row table__row--eye">
+            <td className="table__row--view">
               <FontAwesomeIcon
                 icon={faEye}
                 onClick={() => handleViewBook(book)}

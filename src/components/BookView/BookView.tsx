@@ -1,6 +1,6 @@
 import { Paper } from "@mui/material";
 import { BackArrow } from "../BackArrow/BackArrow";
-import bookview from "../../images/bookview.jpg";
+import bookview_small from "../../images/bookview_small.jpg";
 
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
@@ -53,7 +53,7 @@ export const BookView = () => {
             </button>
           </form>
 
-          <img src={bookview} alt={book.name} className="viewbook__image" />
+          <img src={bookview_small} alt={book.name} className="viewbook__image" />
         </Paper>
       </div>
     </div>
