@@ -1,6 +1,5 @@
 .table {
   border-collapse: collapse;
-  // width: max-content;
   margin: 10px;
 
   background-color: #fff;
@@ -140,14 +139,10 @@
   .table__row--published {
     display: block;
     width: 350px;
-    padding-right: 35px;
+    padding-right: 38px;
     text-align: right;
     line-height: 40px;
   }
-
-  // .table__row--edit {
-  //   line-height: 35px;
-  // }
 
   .table__row--edit,
   .table__row--delete,
@@ -165,24 +160,11 @@
     content: attr(data-label) ": ";
 
     position: absolute;
-    left: 35px;
+    left: 38px;
     text-align: left;
 
     font-weight: bold;
     text-transform: uppercase;
     color: #333;
   }
-
-  // .table__row--delete {
-  //   position: absolute;
-  //   top: 158px;
-  //   left: 275px;
-  //   text-align: right;
-  // }
-
-  // .table__row--view {
-  //   position: absolute;
-  //   left: 150px;
-  //   top: 160px;
-  // }
 }
