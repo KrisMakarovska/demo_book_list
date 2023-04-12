@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  background-image: url(../../images/intro.png);
+  background-image: url(../../images/intro.jpg);
   height: 100vh;
   width: 100%;
   background-size: cover;
@@ -13,6 +13,7 @@
 
   &__title {
     margin: 60px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     text-align: center;
     font-size: 46px;
     color: #f2f2f2;

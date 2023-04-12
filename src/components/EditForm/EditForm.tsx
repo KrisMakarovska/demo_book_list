@@ -15,7 +15,7 @@ export const EditForm = ({ actionBooks }: Props) => {
   const location = useLocation();
 
   const [editedBook, setEditedBook] = useState<Book>(location.state?.book);
-  const [validationModal, setValidationModal] = useState(false);
+  // const [validationModal, setValidationModal] = useState(false);
   const [disabledButton, setDisabledButton] = useState(false);
 
   useEffect(() => {
@@ -117,9 +117,9 @@ export const EditForm = ({ actionBooks }: Props) => {
         </div>
       </div>
 
-      {validationModal && (
+      {/* {validationModal && (
         <ValidationModal setValidationModal={setValidationModal} />
-      )}
+      )} */}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Paper } from "@mui/material";
 import { BackArrow } from "../BackArrow/BackArrow";
@@ -33,7 +33,12 @@ export const AddForm = ({ actionBooks }: Props) => {
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (+formData.published >= 1900 && +formData.published <= 2023) {
+    if (
+      +formData.published >= 1900 && 
+      +formData.published <= 2023 &&
+      formData.author.trim() !== '' &&
+      formData.name.trim() !== ''
+    ) {
       actionBooks("add", formData);
       setFormData({
         id: randomNumber,
@@ -52,9 +57,9 @@ export const AddForm = ({ actionBooks }: Props) => {
       <div className="container">
         <div className="form">
           <Paper className="form__cover">
-            <NavLink to={"/books#bottom"} className="form__arrow">
+            <Link to={"/books#bottom"} className="form__arrow">
               <BackArrow />
-            </NavLink>
+            </Link>
 
             <h2 className="form__title">Please add a new book:</h2>
 

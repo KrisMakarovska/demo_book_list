@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import '../index.scss';
+import './index.scss';
 
-import booksFromServer from "../api/booksFromServer.json";
-import { Book } from "../types/Book";
+import booksFromServer from "./api/booksFromServer.json";
+import { Book } from "./types/Book";
 
-import { AddForm } from "./AddForm/AddForm";
-import { EditForm } from "./EditForm/EditForm";
-import { BookView } from "./BookView/BookView";
-import { Home } from "./HomeComponent/Home";
+import { AddForm } from "./components/AddForm/AddForm";
+import { EditForm } from "./components/EditForm/EditForm";
+import { BookView } from "./components/BookView/BookView";
+import { Home } from "./components/HomeComponent/Home";
+import { useLocalStorage } from "./api/localStorage";
 
 export const App = () => {
-  const [booksToShow, setBooksToShow] = useState<Book[]>(booksFromServer);
+  const [booksToShow, setBooksToShow] = useLocalStorage('book', booksFromServer);
 
   const actionBooks = (action: string, book: Book) => {
     switch (action) {
@@ -20,7 +20,7 @@ export const App = () => {
         break;
       case "edit":
         setBooksToShow(
-          booksToShow.map((b) => {
+          booksToShow.map((b: Book) => {
             if (b.id === book.id) {
               return { ...b, ...book };
             } else {
@@ -30,7 +30,7 @@ export const App = () => {
         );
         break;
       case "delete":
-        setBooksToShow(booksToShow.filter((b) => b.id !== book.id));
+        setBooksToShow(booksToShow.filter((b: Book) => b.id !== book.id));
         break;
     }
   };

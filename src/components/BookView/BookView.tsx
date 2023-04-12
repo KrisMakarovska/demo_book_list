@@ -2,7 +2,7 @@ import { Paper } from "@mui/material";
 import { BackArrow } from "../BackArrow/BackArrow";
 import bookview_small from "../../images/bookview_small.jpg";
 
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const BookView = () => {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ export const BookView = () => {
     <div className="container">
       <div className="form">
         <Paper className="viewbook">
-          <NavLink to={"/books#bottom"} className="form__arrow viewbook__arrow">
+          <Link to={"/books#bottom"} className="form__arrow viewbook__arrow">
             <BackArrow />
-          </NavLink>
+          </Link>
 
           <form
             className="form__inputs viewbook__inputs"

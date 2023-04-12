@@ -19,13 +19,11 @@ export const ValidationModal = ({ setValidationModal }: Props) => {
     <Dialog onClose={handleConfirm} open={true}>
       <DialogContent>
         <DialogContentText>
-          Published year needs to be between 1900-2023
+          <p> Published year needs to be between 1900-2023.</p>
+          Name and author can`t be empty.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        {/* <Button onClick={handleConfirm} variant="contained" color="primary">
-          OK
-        </Button> */}
         <button className="validation-button" type="submit" onClick={handleConfirm}>
           OK
         </button>

@@ -1,7 +1,7 @@
 import { Table } from "./Table/Table";
 import { Book } from "../../types/Book";
 import { AddButton } from "./AddButton/addButton";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +16,7 @@ export const Home = ({ actionBooks, booksToShow }: Props) => {
   const myRef = useRef<HTMLDivElement>(null);
 
   const location = useLocation();
+  console.log(location)
 
   useEffect(() => {
     if (location.hash === "#bottom" && myRef.current !== null) {
@@ -35,7 +36,7 @@ export const Home = ({ actionBooks, booksToShow }: Props) => {
     <>
       <div className="header">
         <h1 className="header__title">WELCOME TO THE ONLINE LIBRARY</h1>
-        <a href="#scroll-down" onClick={handleScrollClick}>
+        <a onClick={handleScrollClick}>
           <FontAwesomeIcon
             className="scroll-icon"
             icon={faChevronDown}
@@ -44,9 +45,9 @@ export const Home = ({ actionBooks, booksToShow }: Props) => {
         </a>
       </div>
       <div className="home" ref={myRef} id="bottom">
-        <NavLink to={"/books/add"} className="home__addbutton">
+        <Link to={"/books/add"} className="home__addbutton">
           <AddButton />
-        </NavLink>
+        </Link>
         <div ref={nextSectionRef}>
           <Table booksToShow={booksToShow} actionBooks={actionBooks} />
         </div>
