@@ -1,19 +1,74 @@
 {
-  "posts": [
+  "books": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id": 250,
+      "name": "Kristina Makarovska",
+      "author": "6",
+      "category": "comedy",
+      "isbn": "4",
+      "createdAt": "2023-05-22T14:43:02.544Z",
+      "modifiedAt": "--",
+      "deactivated": false
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 325,
+      "name": "Kristina Makarovska",
+      "author": "6",
+      "category": "comedy",
+      "isbn": "5",
+      "createdAt": "2023-05-22T14:43:15.931Z",
+      "modifiedAt": "--",
+      "deactivated": false
+    },
+    {
+      "id": 484,
+      "name": "Kristina Makarovska",
+      "author": "6",
+      "category": "fiction",
+      "isbn": "4",
+      "createdAt": "2023-05-22T15:27:52.061Z",
+      "modifiedAt": "--",
+      "deactivated": false
+    },
+    {
+      "id": 450,
+      "name": "Kristina Makarovska",
+      "author": "6",
+      "category": "fiction",
+      "isbn": "3",
+      "createdAt": "2023-05-22T15:30:12.477Z",
+      "modifiedAt": "--",
+      "deactivated": false
+    },
+    {
+      "id": 107,
+      "name": "Kristina Makarovska",
+      "author": "t",
+      "category": "comedy",
+      "isbn": "3",
+      "createdAt": "2023-05-22T15:35:07.155Z",
+      "modifiedAt": "--",
+      "deactivated": false
+    },
+    {
+      "id": 407,
+      "name": "111",
+      "author": "111",
+      "category": "comedy",
+      "isbn": "1",
+      "createdAt": "2023-05-22T16:15:53.644Z",
+      "modifiedAt": "--",
+      "deactivated": false
+    },
+    {
+      "id": 422,
+      "name": "rew",
+      "author": "vfvdvdv",
+      "category": "comedy",
+      "isbn": "44444444444444444",
+      "createdAt": "2023-05-22T16:22:26.436Z",
+      "modifiedAt": "2023-05-22T16:22:58.893Z",
+      "deactivated": false
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
