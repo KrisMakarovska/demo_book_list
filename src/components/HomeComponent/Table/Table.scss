@@ -24,6 +24,11 @@
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
   }
 
+  &__rows--deactivated {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
   &__header {
     background-color: #f3ece6;
   }
@@ -69,15 +74,13 @@
 
   &__row--name,
   &__row--author,
-  &__row--published,
-  &__row--edit,
-  &__row--view,
-  &__row--delete {
+  &__row--category,
+  &__row--isbn,
+  &__row--createdAt,
+  &__row--modifiedAt,
+  &__row--actions {
     text-align: center;
-    height: 50px;
-    padding: 5px;
     border-bottom: 1px solid #ddd;
-
     font-weight: 500;
     color: #333;
   }
@@ -86,6 +89,7 @@
   &__column--author,
   &__row--name,
   &__row--author {
+    padding: 15px;
     width: 200px;
   }
 
@@ -93,31 +97,88 @@
     padding-left: 20px;
   }
 
-  &__row--view {
-    padding-right: 10px;
-  }
-
-  &__column--published,
-  &__row--published {
+  &__column--actions {
     width: 25%;
   }
 
-  &__column--view,
-  &__column--delete,
-  &__column--edit {
-    padding: 12px;
+  &__column--category,
+  &__column--isbn,
+  &__column--createdAt,
+  &__column--modifiedAt,
+  &__row--category,
+  &__row--isbn,
+  &__row--createdAt,
+  &__row--modifiedAt {
+    padding: 15px;
     text-align: center;
   }
 
-  &__row--view,
-  &__row--delete,
-  &__row--edit {
-    cursor: pointer;
+ &__row--actions {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+  }
+
+  &__row--editButton,
+  &__row--delButton,
+  &__row--actButton {
+    margin: 8px;
+    padding: 10px;
     text-align: center;
+
+    font-size: 0.9rem;
+    border-radius: 3px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  &__row--editButton {
+    background-color: #beb5a2;
+
+    &:hover {
+      background-color: #6a6253;
+    }
+  }
+
+  &__row--actButton {
+    background-color: #8cc58c;
+
+    &:hover {
+      background-color: #147014;
+    }
+  }
+
+  &__row--actButtonDeact {
+    background-color: #b8854e;
+
+    &:hover {
+      background-color: #a76014;
+    }
+  }
+
+  &__row--delButton {
+    background-color: #ff7575;
+
+    &:hover {
+      background-color: #ad3232;
+    }
+  }
+
+  &__row--delButtonDeact {
+    background-color: #f1f1f1;
+    color: #888;
+
+    &:hover {
+      background-color: #f1f1f1;
+      cursor: auto;
+    }
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1072px) {
   .table thead {
     display: none;
   }
@@ -136,32 +197,48 @@
 
   .table__row--name,
   .table__row--author,
-  .table__row--published {
+  .table__row--category,
+  .table__row--isbn,
+  .table__row--createdAt,
+  .table__row--modifiedAt,
+  .table__row--actions {
     display: block;
-    width: 350px;
+    width: 100%;
+    // height: 55px;
     padding-right: 38px;
     text-align: right;
-    line-height: 40px;
+    // line-height: 55px;
   }
 
-  .table__row--edit,
-  .table__row--delete,
-  .table__row--view {
+  .table__row--actions {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+  }
+
+  .table__row--editButton,
+  .table__row--delButton,
+  .table__row--actButton,
+  .table__row--actButtonDeact,
+  .table__row--delButtonDeact {
     display: inline-block;
-    padding-top: 14px;
-    width: 95px;
-    text-align: right;
+    padding: 7px;
+    width: 82px;
     border-bottom: none;
   }
 
-  .table__row--published::before,
+  .table__row--name::before,
   .table__row--author::before,
-  .table__row--name::before {
+  .table__row--category::before,
+  .table__row--author::before,
+  .table__row--isbn::before,
+  .table__row--createdAt::before,
+  .table__row--modifiedAt::before {
     content: attr(data-label) ": ";
-
     position: absolute;
     left: 38px;
     text-align: left;
+    // line-height: 55px;
 
     font-weight: bold;
     text-transform: uppercase;

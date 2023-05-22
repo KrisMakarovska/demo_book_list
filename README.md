@@ -1,19 +1,29 @@
-**Game 2048**
+**Book List**
 
-🚀 Book Library - is a popular puzzle game in which the player must slide numbered tiles on a grid to combine them and create a tile with the number 2048.
+🚀 Book List - is a CRUD web application that allows users to watch books list, to add, delete and edit existing books.
 
-[DEMO LINK](https://krismakarovska.github.io/game_2048/)
+[DEMO LINK](https://krismakarovska.github.io/demo_book_list/)
 
 Technologies:
+* React,
+* React Router,
 * Javascript,
+* Typescript,
+* REST API,
 * HTML,
 * CSS, SCSS
+* Material UI
  
-:small_orange_diamond: The game is played on a 4x4 grid;    
-:small_orange_diamond: Each tile on the grid contains a number, starting with 2;    
-:small_orange_diamond: The player can move tiles in one of four directions - up, down, left, or right;    
-:small_orange_diamond: When two tiles with the same number touch, they merge into one, with the resulting tile's number being the sum of the two original tiles;       
-:small_orange_diamond: After every move, a new tile with a value of either 2 or 4 is randomly generated on an empty space on the grid;    
-:small_orange_diamond: The goal is to create a tile with the number 2048 by merging tiles;    
-:small_orange_diamond: The player's score is the sum of the values of all the tiles on the grid at the end of the game;    
+:small_orange_diamond: click on Add button to open add form;    
+:small_orange_diamond: fill in empty fields and submit a new book to the list;    
+:small_orange_diamond: click on the Edit icon to open the editing form;    
+:small_orange_diamond: make changes you need and submit changes;       
+:small_orange_diamond: click on the Delete icon to delete the book;    
+:small_orange_diamond: confirmation modal will appear before you delete the book;      
+:small_orange_diamond: pop-up window will appear after you successfully add/edit or delete the book;    
+:small_orange_diamond: filter the book list to see activated or deactivated books;    
+
+
+:small_orange_diamond: validation modal will appear in case you submit empty data;    
+   
  

@@ -1,67 +1,75 @@
-import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
-import { BackArrow } from "../BackArrow/BackArrow";
-import { ValidationModal } from "../ValidationModal/ValidationModal";
+import { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { BackArrow } from "../BackArrow/BackArrow";
 
-import { Book } from "../../types/Book";
+import { editBook } from '../../api/requests';
+import { Book, PatchBook } from "../../types/Book";
+import { formatBookTimeData } from "../../utils/convertToFormattedTime";
 
 type Props = {
-  actionBooks: (a: string, B: Book) => void;
+  actionBooks: (a: string, b: Book) => void,
+  setShowPopup: (s: boolean) => void,
+  setPopupAction: (a: string) => void;
 };
 
-export const EditForm = ({ actionBooks }: Props) => {
+export const EditForm = ({ actionBooks, setShowPopup, setPopupAction }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [editedBook, setEditedBook] = useState<Book>(location.state?.book);
-  // const [validationModal, setValidationModal] = useState(false);
   const [disabledButton, setDisabledButton] = useState(false);
 
   useEffect(() => {
     setEditedBook(location.state?.book);
   }, [location]);
 
-  const { name, author, published } = editedBook;
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (editedBook !== null) {
-      setEditedBook({ ...editedBook, name: event.target.value });
-    }
-  };
-
-  const handleAuthorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (editedBook !== null) {
-      setEditedBook({ ...editedBook, author: event.target.value });
-    }
-  };
-
-  const handleAPublishedChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (editedBook !== null) {
-      setEditedBook({ ...editedBook, published: event.target.value });
-    }
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    actionBooks("edit", editedBook);
-    navigate("/books/#bottom");
-  };
-
   useEffect(() => {
-    if (
-      name.length <= 70 &&
-      author.length <= 120 &&
-      +published >= 1900 &&
-      +published <= 2023
-    ) {
+    if (name.trim() !== '' && author.trim() !== '' && isbn.trim() !== '') {
       setDisabledButton(false);
     } else {
       setDisabledButton(true);
     }
   }, [editedBook]);
+
+  const { id, name, author, category, isbn } = editedBook;
+
+  const handleInputChanges = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    if (editedBook !== null) {
+      const { name, value } = event.target;
+      setEditedBook((prevBookData) => ({ ...prevBookData, [name]: value }))
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (author.trim() !== "" && name.trim() !== "") {
+      const currentDate = new Date();
+      const utcDateTime = currentDate.toISOString();
+
+      const editData: PatchBook = {
+        name,
+        author,
+        category,
+        isbn,
+        modifiedAt: `${utcDateTime}`,
+      };
+
+      editBook(id, editData)
+        .then((data: any) => {
+          setPopupAction('edited');
+            setShowPopup(true);
+            setTimeout(() => {
+              setShowPopup(false)
+            }, 2000);
+          const formatedBookTime = formatBookTimeData(data);
+          actionBooks("edit", formatedBookTime);
+        });
+    }
+
+    navigate("/books/#bottom");
+  };
 
   return (
     <>
@@ -80,9 +88,8 @@ export const EditForm = ({ actionBooks }: Props) => {
                 name="name"
                 placeholder="Name"
                 required
-                maxLength={70}
                 value={name}
-                onChange={handleNameChange}
+                onChange={handleInputChanges}
               />
 
               <input
@@ -91,21 +98,43 @@ export const EditForm = ({ actionBooks }: Props) => {
                 name="author"
                 placeholder="Author"
                 required
-                maxLength={120}
                 value={author}
-                onChange={handleAuthorChange}
+                onChange={handleInputChanges}
               />
+
+              <select
+                className="form__field"
+                required 
+                // placeholder="Choose category"
+                name="category"
+                value={category}
+                onChange={handleInputChanges}
+              >
+                <option value="" disabled>
+                  Choose category
+                </option>
+                <option value="fiction">
+                  fiction
+                </option>
+                <option value="comedy">
+                  comedy
+                </option>
+                <option value="novel">
+                  novel
+                </option>
+              </select>
 
               <input
                 className="form__field"
                 type="number"
-                name="published"
-                placeholder="Published year"
+                name="isbn"
+                placeholder="ISNB"
                 required
-                value={published}
-                onChange={handleAPublishedChange}
+                value={isbn}
+                onChange={handleInputChanges}
               />
-              <button 
+
+              <button
                 className="edit-button"
                 type="submit"
                 disabled={disabledButton}
@@ -116,10 +145,6 @@ export const EditForm = ({ actionBooks }: Props) => {
           </Paper>
         </div>
       </div>
-
-      {/* {validationModal && (
-        <ValidationModal setValidationModal={setValidationModal} />
-      )} */}
     </>
   );
 };

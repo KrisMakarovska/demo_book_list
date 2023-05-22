@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import classnames from 'classnames';
+import { editBook } from '../../../api/requests';
+// import { insertPopUpMessege } from '../../../utils/popupMessenge';
 
 import {
   Dialog,
@@ -7,25 +10,31 @@ import {
   DialogContent,
   DialogContentText,
 } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
-
 import { Book } from "../../../types/Book";
+import { deleteBook } from '../../../api/requests';
+import { formatBookTimeData } from "../../../utils/convertToFormattedTime";
+import { PopupMessege } from "../../PopupMessege/PopupMessege";
 
 type Props = {
-  booksToShow: Book[];
-  actionBooks: (a: string, b: Book) => void;
+  booksFiltered: Book[];
+  actionBooks: (a: string, b: Book) => void,
+  setPopupAction: (a: string) => void,
+  popupAction: string,
+  showPopup: boolean,
+  setShowPopup: (s: boolean) => void,
 };
 
-export const Table = ({ booksToShow, actionBooks }: Props) => {
+export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction, showPopup, setShowPopup }: Props) => {
   const [openModal, setOpenModal] = useState(false);
-  const [itemIdToDelete, setItemIdToDelete] = useState<Book | null>(null);
+  const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
 
   const navigate = useNavigate();
 
   const handleDeleteClick = (book: Book) => {
-    setItemIdToDelete(book);
-    setOpenModal(true);
+    if (book.deactivated) {
+      setBookToDelete(book);
+      setOpenModal(true);
+    }
   };
 
   const handleCloseModal = () => {
@@ -33,8 +42,18 @@ export const Table = ({ booksToShow, actionBooks }: Props) => {
   };
 
   const handleConfirmModal = () => {
-    if (itemIdToDelete !== null) {
-      actionBooks("delete", itemIdToDelete);
+    if (bookToDelete !== null) {
+      deleteBook(bookToDelete.id)
+        .then(() => {
+            setBookToDelete(null);
+            setPopupAction('deleted');
+            setShowPopup(true);
+            setTimeout(() => {
+              setShowPopup(false)
+            }, 2000);
+            actionBooks("delete", bookToDelete);
+
+        })
       setOpenModal(false);
     }
   };
@@ -43,8 +62,14 @@ export const Table = ({ booksToShow, actionBooks }: Props) => {
     navigate(`/books/${book.id}/edit`, { state: { book } });
   };
 
-  const handleViewBook = (book: Book) => {
-    navigate(`/books/${book.id}`, { state: { book } });
+  const handleStatusBook = (book: Book) => {
+    const updatedStatus = { deactivated: !book.deactivated };
+
+    editBook(book.id, updatedStatus)
+      .then((data: any) => {
+        const formatedBookTime = formatBookTimeData(data);
+        actionBooks('edit', formatedBookTime);
+      })
   };
 
   return (
@@ -73,46 +98,88 @@ export const Table = ({ booksToShow, actionBooks }: Props) => {
         </Dialog>
       )}
 
+      {showPopup && (
+        <PopupMessege popupAction={popupAction}/>
+      )}
+
       <thead className="table__header">
         <tr>
-          <th className="table__column table__column--name">Name</th>
-          <th className="table__column table__column--author">Author</th>
-          <th className="table__column table__column--published">Published</th>
-          <th className="table__column table__column--edit">Edit</th>
-          <th className="table__column table__column--delete">Delete</th>
-          <th className="table__column table__column--view">View Book</th>
+          <th className="table__column table__column--name">Book Title</th>
+          <th className="table__column table__column--author">Author Name</th>
+          <th className="table__column table__column--category">Category</th>
+          <th className="table__column table__column--isbn">ISBN</th>
+          <th className="table__column table__column--createdAt">Created</th>
+          <th className="table__column table__column--modifiedAt">Modified</th>
+          <th className="table__column table__column--actions">Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        {booksToShow.map((book: Book) => (
+        {booksFiltered.map((book: Book) => (
           <tr key={book.id} className="table__rows">
-            <td className="table__row--name" data-label="Name">
+            <td
+            className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--name")}
+              data-label="Book Title"
+            >
               {book.name}
             </td>
-            <td className="table__row--author" data-label="Author">
+
+            <td
+              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--author")}
+              data-label="Author Name"
+            >
               {book.author}
             </td>
-            <td className="table__row--published" data-label="Published">
-              {book.published}
+
+            <td
+              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--category")}
+              data-label="Category"
+            >
+              {book.category}
             </td>
-            <td className="table__row--edit">
-              <FontAwesomeIcon
-                icon={faEdit}
-                onClick={() => handleEditBook(book)}
-              />
+
+            <td
+              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--isbn")}
+              data-label="ISBN"
+            >
+              {book.isbn}
             </td>
-            <td className="table__row--delete">
-              <FontAwesomeIcon
-                icon={faTrash}
-                onClick={() => handleDeleteClick(book)}
-              />
+
+            <td
+              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--createdAt")}
+              data-label="Created"
+            >
+              {book.createdAt}
             </td>
-            <td className="table__row--view">
-              <FontAwesomeIcon
-                icon={faEye}
-                onClick={() => handleViewBook(book)}
-              />
+
+            <td
+              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--modifiedAt")}
+              data-label="Modified"
+            >
+              {book.modifiedAt}
+            </td>
+            <td className="table__row--actions">
+                <button
+                  className="table__row--editButton"
+                  onClick={() => handleEditBook(book)}>edit
+                </button>
+
+                <button
+                className={classnames(
+                  { "table__row--actButtonDeact": !book.deactivated },
+                  "table__row--actButton"
+                )}
+                  onClick={() => handleStatusBook(book)}>
+                    {book.deactivated ? 're-activate' : 'deactivate'}
+                </button>
+
+                <button
+                  className={classnames(
+                    { "table__row--delButtonDeact": !book.deactivated },
+                    "table__row--delButton"
+                  )}
+                  onClick={() => handleDeleteClick(book)}>delete
+                </button>
             </td>
           </tr>
         ))}
@@ -120,3 +187,4 @@ export const Table = ({ booksToShow, actionBooks }: Props) => {
     </table>
   );
 };
+

@@ -8,6 +8,10 @@
   justify-content: center;
 
   &__title {
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
     align-self: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 36px;

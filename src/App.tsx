@@ -1,26 +1,70 @@
+/* eslint-disable no-var */
+import { useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import './index.scss';
+import "./index.scss";
 
-import booksFromServer from "./api/booksFromServer.json";
+import { getBooks } from "./api/requests";
 import { Book } from "./types/Book";
+import { convertToFormattedTime } from "./utils/convertToFormattedTime";
 
 import { AddForm } from "./components/AddForm/AddForm";
 import { EditForm } from "./components/EditForm/EditForm";
-import { BookView } from "./components/BookView/BookView";
 import { Home } from "./components/HomeComponent/Home";
-import { useLocalStorage } from "./api/localStorage";
+import { FilteredBy } from "./types/Filters";
 
 export const App = () => {
-  const [booksToShow, setBooksToShow] = useLocalStorage('book', booksFromServer);
+  const [booksFromServer, setBooksFromServer] = useState<Book[]>([]);
+  //context
+  const [filter, setFilter] = useState("");
+  const [popupAction, setPopupAction] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    getBooks()
+      .then((data) => {
+        const formattedBooks = data.map((book: Book) => {
+          return {
+            ...book,
+            createdAt: convertToFormattedTime(book.createdAt),
+            modifiedAt:
+              book.modifiedAt === "--"
+                ? "--"
+                : convertToFormattedTime(book.modifiedAt),
+          };
+        });
+        setBooksFromServer(formattedBooks);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  const booksFiltered: Book[] = useMemo(() => {
+    return booksFromServer.filter((book) => {
+      switch (filter) {
+        case FilteredBy.ALL:
+          return true;
+
+        case FilteredBy.ACTIVE:
+          return !book.deactivated;
+
+        case FilteredBy.DEACTIVATED:
+          return book.deactivated;
+
+        default:
+          return !book.deactivated;
+      }
+    });
+  }, [booksFromServer, filter]);
 
   const actionBooks = (action: string, book: Book) => {
     switch (action) {
       case "add":
-        setBooksToShow([...booksToShow, book]);
+        setBooksFromServer([...booksFromServer, book]);
         break;
       case "edit":
-        setBooksToShow(
-          booksToShow.map((b: Book) => {
+        setBooksFromServer(
+          booksFromServer.map((b: Book) => {
             if (b.id === book.id) {
               return { ...b, ...book };
             } else {
@@ -30,8 +74,12 @@ export const App = () => {
         );
         break;
       case "delete":
-        setBooksToShow(booksToShow.filter((b: Book) => b.id !== book.id));
+        setBooksFromServer(
+          booksFromServer.filter((b: Book) => b.id !== book.id)
+        );
         break;
+      default:
+        return book;
     }
   };
 
@@ -41,15 +89,41 @@ export const App = () => {
       <Route path="/books">
         <Route
           index
-          element={<Home booksToShow={booksToShow} actionBooks={actionBooks} />}
+          element={
+            <Home
+              booksFiltered={booksFiltered}
+              booksFromServer={booksFromServer}
+              actionBooks={actionBooks}
+              setFilter={setFilter}
+              filter={filter}
+              setPopupAction={setPopupAction}
+              popupAction={popupAction}
+              showPopup={showPopup}
+              setShowPopup={setShowPopup}
+            />
+          }
         />
-        <Route path="add" element={<AddForm actionBooks={actionBooks} />} />
+        <Route
+          path="add"
+          element={
+            <AddForm
+              actionBooks={actionBooks}
+              setPopupAction={setPopupAction}
+              setShowPopup={setShowPopup}
+            />
+          }
+        />
 
         <Route
           path=":id/edit"
-          element={<EditForm actionBooks={actionBooks} />}
+          element={
+            <EditForm
+              actionBooks={actionBooks}
+              setShowPopup={setShowPopup}
+              setPopupAction={setPopupAction}
+            />
+          }
         />
-        <Route path=":id" element={<BookView />} />
       </Route>
     </Routes>
   );
