@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -8,19 +8,14 @@ import { ValidationModal } from "../ValidationModal/ValidationModal";
 
 import { addBook } from "../../api/requests";
 import { Book } from "../../types/Book";
+import { SharedDataContext } from "../../utils/context";
 import { formatBookTimeData } from "../../utils/convertToFormattedTime";
 
 type Props = {
   actionBooks: (a: string, b: Book) => void;
-  setPopupAction: (a: string) => void;
-  setShowPopup: (s: boolean) => void;
 };
 
-export const AddForm = ({
-  actionBooks,
-  setPopupAction,
-  setShowPopup,
-}: Props) => {
+export const AddForm = ({ actionBooks }: Props) => {
   const randomNumber = Math.floor(Math.random() * 500) + 1;
 
   const [formData, setFormData] = useState({
@@ -31,6 +26,8 @@ export const AddForm = ({
     isbn: "",
   });
   const [validationModal, setValidationModal] = useState(false);
+
+  const { setPopupAction, setShowPopup } = useContext(SharedDataContext);
 
   const navigate = useNavigate();
 
@@ -102,7 +99,7 @@ export const AddForm = ({
               <input
                 className="form__field"
                 name="name"
-                placeholder="name"
+                placeholder="Name"
                 type="text"
                 value={formData.name}
                 onChange={handleInputChange}
@@ -111,7 +108,7 @@ export const AddForm = ({
                 className="form__field"
                 type="text"
                 name="author"
-                placeholder="author"
+                placeholder="Author"
                 value={formData.author}
                 onChange={handleInputChange}
               />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classnames from "classnames";
 import { editBook } from "../../../api/requests";
@@ -12,27 +12,19 @@ import {
 import { Book } from "../../../types/Book";
 import { deleteBook } from "../../../api/requests";
 import { formatBookTimeData } from "../../../utils/convertToFormattedTime";
-import { PopupMessege } from "../../PopupMessege/PopupMessege";
+import { PopupMessege } from "../PopupMessege/PopupMessege";
+import { SharedDataContext } from "../../../utils/context";
 
 type Props = {
-  booksFiltered: Book[];
   actionBooks: (a: string, b: Book) => void;
-  setPopupAction: (a: string) => void;
-  popupAction: string;
-  showPopup: boolean;
-  setShowPopup: (s: boolean) => void;
 };
 
-export const Table = ({
-  booksFiltered,
-  actionBooks,
-  setPopupAction,
-  popupAction,
-  showPopup,
-  setShowPopup,
-}: Props) => {
+export const Table = ({ actionBooks }: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
+
+  const { booksFiltered, setPopupAction, showPopup, setShowPopup } =
+    useContext(SharedDataContext);
 
   const navigate = useNavigate();
 
@@ -101,7 +93,7 @@ export const Table = ({
         </Dialog>
       )}
 
-      {showPopup && <PopupMessege popupAction={popupAction} />}
+      {showPopup && (<PopupMessege/>)}
 
       <thead className="table__header">
         <tr>

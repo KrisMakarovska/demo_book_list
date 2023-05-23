@@ -1,8 +1,9 @@
-type Props = {
-  popupAction: string;
-};
+import { useContext } from "react";
+import { SharedDataContext } from "../../../utils/context";
 
-export const PopupMessege = ({ popupAction }: Props) => {
+export const PopupMessege = () => {
+  const { popupAction } = useContext(SharedDataContext);
+
   return (
     <div className="popup">
       <div className="popup__background">

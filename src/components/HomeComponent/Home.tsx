@@ -6,31 +6,14 @@ import { Table } from "./Table/Table";
 
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FilteredBy } from "../../types/Filters";
+import { StatusFilter } from "../Filter/Filter";
+import { Footer } from "./Footer/Footer";
 
 type Props = {
   actionBooks: (a: string, b: Book) => void;
-  booksFromServer: Book[];
-  booksFiltered: Book[];
-  setFilter: (s: string) => void;
-  filter: string;
-  setPopupAction: (s: string) => void;
-  popupAction: string;
-  showPopup: boolean;
-  setShowPopup: (s: boolean) => void;
 };
 
-export const Home = ({
-  actionBooks,
-  booksFiltered,
-  booksFromServer,
-  setFilter,
-  filter,
-  setPopupAction,
-  popupAction,
-  showPopup,
-  setShowPopup,
-}: Props) => {
+export const Home = ({ actionBooks }: Props) => {
   const myRef = useRef<HTMLDivElement>(null);
 
   const location = useLocation();
@@ -49,8 +32,6 @@ export const Home = ({
     }
   };
 
-  const numberOfBooks = `${booksFiltered.length} of ${booksFromServer.length} books`;
-
   return (
     <>
       <div className="header">
@@ -68,43 +49,15 @@ export const Home = ({
         <Link to={"/books/add"} className="home__addbutton">
           <AddButton />
         </Link>
-        <div className="filter">
-          <select
-            className="filter__selector"
-            value={filter}
-            onChange={(event) => {
-              setFilter(event.target.value);
-              event.target.blur();
-            }}
-          >
-            <option value={FilteredBy.ACTIVE}>Show active</option>
-            <option value={FilteredBy.ALL}>Show all</option>
-            <option value={FilteredBy.DEACTIVATED}>Show deactivated</option>
-          </select>
-          <div className="filter__quantity">{numberOfBooks}</div>
-        </div>
+
+        <StatusFilter />
 
         <div ref={nextSectionRef}>
-          <Table
-            booksFiltered={booksFiltered}
-            actionBooks={actionBooks}
-            setPopupAction={setPopupAction}
-            popupAction={popupAction}
-            showPopup={showPopup}
-            setShowPopup={setShowPopup}
-          />
+          <Table actionBooks={actionBooks} />
         </div>
       </div>
-      <div className="footer">
-        <a
-          href="https://github.com/KrisMakarovska"
-          className="footer__title"
-          rel="noreferrer"
-          target={"_blank"}
-        >
-          GitHub Account
-        </a>
-      </div>
+
+      <Footer />
     </>
   );
 };

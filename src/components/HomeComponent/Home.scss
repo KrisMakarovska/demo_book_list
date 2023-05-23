@@ -57,26 +57,3 @@
     transform: translateY(0);
   }
 }
-
-.filter {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-
-  &__selector {
-    padding: 10px;
-  
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-
-    font-size: 16px;
-    color: #333;
-    background-color: #fff;
-    transition: border-color 0.3s ease-in-out;
-  }
-
-  &__quantity {
-    width: 100%;
-  }
-}

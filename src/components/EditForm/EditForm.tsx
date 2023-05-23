@@ -1,29 +1,25 @@
 import Paper from "@mui/material/Paper";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { BackArrow } from "../BackArrow/BackArrow";
 
 import { editBook } from "../../api/requests";
 import { Book, PatchBook } from "../../types/Book";
 import { formatBookTimeData } from "../../utils/convertToFormattedTime";
+import { SharedDataContext } from "../../utils/context";
 
 type Props = {
   actionBooks: (a: string, b: Book) => void;
-  setShowPopup: (s: boolean) => void;
-  setPopupAction: (a: string) => void;
 };
 
-export const EditForm = ({
-  actionBooks,
-  setShowPopup,
-  setPopupAction,
-}: Props) => {
+export const EditForm = ({ actionBooks }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [editedBook, setEditedBook] = useState<Book>(location.state?.book);
   const [disabledButton, setDisabledButton] = useState(false);
 
+  const { setPopupAction, setShowPopup } = useContext(SharedDataContext);
   const { id, name, author, category, isbn } = editedBook;
 
   useEffect(() => {
@@ -110,7 +106,6 @@ export const EditForm = ({
               <select
                 className="form__field"
                 required
-                // placeholder="Choose category"
                 name="category"
                 value={category}
                 onChange={handleInputChanges}

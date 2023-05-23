@@ -11,10 +11,10 @@ import { AddForm } from "./components/AddForm/AddForm";
 import { EditForm } from "./components/EditForm/EditForm";
 import { Home } from "./components/HomeComponent/Home";
 import { FilteredBy } from "./types/Filters";
+import { SharedData, SharedDataContext } from "./utils/context";
 
 export const App = () => {
   const [booksFromServer, setBooksFromServer] = useState<Book[]>([]);
-  //context
   const [filter, setFilter] = useState("");
   const [popupAction, setPopupAction] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -83,48 +83,31 @@ export const App = () => {
     }
   };
 
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/books" />} />
-      <Route path="/books">
-        <Route
-          index
-          element={
-            <Home
-              booksFiltered={booksFiltered}
-              booksFromServer={booksFromServer}
-              actionBooks={actionBooks}
-              setFilter={setFilter}
-              filter={filter}
-              setPopupAction={setPopupAction}
-              popupAction={popupAction}
-              showPopup={showPopup}
-              setShowPopup={setShowPopup}
-            />
-          }
-        />
-        <Route
-          path="add"
-          element={
-            <AddForm
-              actionBooks={actionBooks}
-              setPopupAction={setPopupAction}
-              setShowPopup={setShowPopup}
-            />
-          }
-        />
+  const sharedData: SharedData = {
+    booksFromServer,
+    booksFiltered,
+    filter,
+    setFilter,
+    popupAction,
+    setPopupAction,
+    showPopup,
+    setShowPopup,
+  };
 
-        <Route
-          path=":id/edit"
-          element={
-            <EditForm
-              actionBooks={actionBooks}
-              setShowPopup={setShowPopup}
-              setPopupAction={setPopupAction}
-            />
-          }
-        />
-      </Route>
-    </Routes>
+  return (
+    <SharedDataContext.Provider value={sharedData}>
+      <Routes>
+        <Route path="/" element={<Navigate to="/books" />} />
+        <Route path="/books">
+          <Route index element={<Home actionBooks={actionBooks} />} />
+          <Route path="add" element={<AddForm actionBooks={actionBooks} />} />
+
+          <Route
+            path=":id/edit"
+            element={<EditForm actionBooks={actionBooks} />}
+          />
+        </Route>
+      </Routes>
+    </SharedDataContext.Provider>
   );
 };
