@@ -1,73 +1,73 @@
 {
   "books": [
     {
-      "id": 250,
-      "name": "Kristina Makarovska",
-      "author": "6",
-      "category": "comedy",
-      "isbn": "4",
-      "createdAt": "2023-05-22T14:43:02.544Z",
-      "modifiedAt": "--",
-      "deactivated": false
-    },
-    {
-      "id": 325,
-      "name": "Kristina Makarovska",
-      "author": "6",
-      "category": "comedy",
-      "isbn": "5",
-      "createdAt": "2023-05-22T14:43:15.931Z",
-      "modifiedAt": "--",
-      "deactivated": false
-    },
-    {
-      "id": 484,
-      "name": "Kristina Makarovska",
-      "author": "6",
+      "id": 1,
+      "name": "To Kill a Mockingbird",
+      "author": "Harper Lee",
       "category": "fiction",
-      "isbn": "4",
-      "createdAt": "2023-05-22T15:27:52.061Z",
-      "modifiedAt": "--",
+      "isbn": "9780061120084",
+      "createdAt": "2023-05-17T10:00:00Z",
+      "modifiedAt": "2023-05-17T11:30:00Z",
       "deactivated": false
     },
     {
-      "id": 450,
-      "name": "Kristina Makarovska",
-      "author": "6",
+      "id": 2,
+      "name": "Pride and Prejudice",
+      "author": "Jane Austen",
       "category": "fiction",
-      "isbn": "3",
-      "createdAt": "2023-05-22T15:30:12.477Z",
-      "modifiedAt": "--",
+      "isbn": "9780141439518",
+      "createdAt": "2023-05-16T09:15:00Z",
+      "modifiedAt": "2023-05-17T14:45:00Z",
+      "deactivated": true
+    },
+    {
+      "id": 3,
+      "name": "1984",
+      "author": "George Orwell",
+      "category": "novel",
+      "isbn": "9780451524935",
+      "createdAt": "2023-05-15T16:30:00Z",
+      "modifiedAt": "2023-05-16T08:20:00Z",
+      "deactivated": true
+    },
+    {
+      "id": 4,
+      "name": "Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "category": "fiction",
+      "isbn": "9780316769488",
+      "createdAt": "2023-05-14T14:45:00Z",
+      "modifiedAt": "2023-05-23T07:58:31.248Z",
       "deactivated": false
     },
     {
-      "id": 107,
-      "name": "Kristina Makarovska",
-      "author": "t",
+      "id": 5,
+      "name": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "category": "fiction",
+      "isbn": "9780743273565",
+      "createdAt": "2023-05-13T11:30:00Z",
+      "modifiedAt": "2023-05-14T08:15:00Z",
+      "deactivated": false
+    },
+    {
+      "id": 7,
+      "name": "The Galaxy",
+      "author": "Douglas Adams",
       "category": "comedy",
-      "isbn": "3",
-      "createdAt": "2023-05-22T15:35:07.155Z",
-      "modifiedAt": "--",
+      "isbn": "9780345391803",
+      "createdAt": "2023-05-11T15:30:00Z",
+      "modifiedAt": "2023-05-12T09:45:00Z",
       "deactivated": false
     },
     {
-      "id": 407,
-      "name": "111",
-      "author": "111",
+      "id": 48,
+      "name": "test1",
+      "author": "test1",
       "category": "comedy",
       "isbn": "1",
-      "createdAt": "2023-05-22T16:15:53.644Z",
+      "createdAt": "2023-05-23T08:00:19.631Z",
       "modifiedAt": "--",
-      "deactivated": false
-    },
-    {
-      "id": 422,
-      "name": "rew",
-      "author": "vfvdvdv",
-      "category": "comedy",
-      "isbn": "44444444444444444",
-      "createdAt": "2023-05-22T16:22:26.436Z",
-      "modifiedAt": "2023-05-22T16:22:58.893Z",
       "deactivated": false
     }
   ]
