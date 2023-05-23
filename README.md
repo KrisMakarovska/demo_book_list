@@ -24,15 +24,15 @@
 
 :pushpin: How to run the app locally:  
 - click the Code button,    
-- copy the link,
+- copy the HTTPS link,
 - open terminal,
 - run `mkdir folder-name` to create folder for the project,
 - run `cd folder-name` to navigate inside the folder
-- run `git clone the-link-from-github` with the URL you copied on Github to clone the repo on you computer, 
+- run `git clone the-link-from-github` with the URL you copied on Github to clone the repo on your computer, 
 - open your  IDE,
 - check if you are inside the project,
 - open terminal in IDE,
-- run `npm instal`,
+- run `npm install`,
 - run `npm install -g json-server`,
 - run `json-server --watch db.json`,
 - open one more terminal (do not close the first one) and run `npm start`,    
