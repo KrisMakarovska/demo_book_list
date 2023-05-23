@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import classnames from 'classnames';
-import { editBook } from '../../../api/requests';
-// import { insertPopUpMessege } from '../../../utils/popupMessenge';
+import classnames from "classnames";
+import { editBook } from "../../../api/requests";
 
 import {
   Dialog,
@@ -11,20 +10,27 @@ import {
   DialogContentText,
 } from "@mui/material";
 import { Book } from "../../../types/Book";
-import { deleteBook } from '../../../api/requests';
+import { deleteBook } from "../../../api/requests";
 import { formatBookTimeData } from "../../../utils/convertToFormattedTime";
 import { PopupMessege } from "../../PopupMessege/PopupMessege";
 
 type Props = {
   booksFiltered: Book[];
-  actionBooks: (a: string, b: Book) => void,
-  setPopupAction: (a: string) => void,
-  popupAction: string,
-  showPopup: boolean,
-  setShowPopup: (s: boolean) => void,
+  actionBooks: (a: string, b: Book) => void;
+  setPopupAction: (a: string) => void;
+  popupAction: string;
+  showPopup: boolean;
+  setShowPopup: (s: boolean) => void;
 };
 
-export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction, showPopup, setShowPopup }: Props) => {
+export const Table = ({
+  booksFiltered,
+  actionBooks,
+  setPopupAction,
+  popupAction,
+  showPopup,
+  setShowPopup,
+}: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
 
@@ -43,17 +49,15 @@ export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction,
 
   const handleConfirmModal = () => {
     if (bookToDelete !== null) {
-      deleteBook(bookToDelete.id)
-        .then(() => {
-            setBookToDelete(null);
-            setPopupAction('deleted');
-            setShowPopup(true);
-            setTimeout(() => {
-              setShowPopup(false)
-            }, 2000);
-            actionBooks("delete", bookToDelete);
-
-        })
+      deleteBook(bookToDelete.id).then(() => {
+        setBookToDelete(null);
+        setPopupAction("deleted");
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 2000);
+        actionBooks("delete", bookToDelete);
+      });
       setOpenModal(false);
     }
   };
@@ -65,11 +69,10 @@ export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction,
   const handleStatusBook = (book: Book) => {
     const updatedStatus = { deactivated: !book.deactivated };
 
-    editBook(book.id, updatedStatus)
-      .then((data: any) => {
-        const formatedBookTime = formatBookTimeData(data);
-        actionBooks('edit', formatedBookTime);
-      })
+    editBook(book.id, updatedStatus).then((data: any) => {
+      const formatedBookTime = formatBookTimeData(data);
+      actionBooks("edit", formatedBookTime);
+    });
   };
 
   return (
@@ -98,9 +101,7 @@ export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction,
         </Dialog>
       )}
 
-      {showPopup && (
-        <PopupMessege popupAction={popupAction}/>
-      )}
+      {showPopup && <PopupMessege popupAction={popupAction} />}
 
       <thead className="table__header">
         <tr>
@@ -118,68 +119,91 @@ export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction,
         {booksFiltered.map((book: Book) => (
           <tr key={book.id} className="table__rows">
             <td
-            className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--name")}
+              className={classnames(
+                { "table__rows--deactivated": book.deactivated },
+                "table__row--name"
+              )}
               data-label="Book Title"
             >
               {book.name}
             </td>
 
             <td
-              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--author")}
+              className={classnames(
+                { "table__rows--deactivated": book.deactivated },
+                "table__row--author"
+              )}
               data-label="Author Name"
             >
               {book.author}
             </td>
 
             <td
-              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--category")}
+              className={classnames(
+                { "table__rows--deactivated": book.deactivated },
+                "table__row--category"
+              )}
               data-label="Category"
             >
               {book.category}
             </td>
 
             <td
-              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--isbn")}
+              className={classnames(
+                { "table__rows--deactivated": book.deactivated },
+                "table__row--isbn"
+              )}
               data-label="ISBN"
             >
               {book.isbn}
             </td>
 
             <td
-              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--createdAt")}
+              className={classnames(
+                { "table__rows--deactivated": book.deactivated },
+                "table__row--createdAt"
+              )}
               data-label="Created"
             >
               {book.createdAt}
             </td>
 
             <td
-              className={classnames({"table__rows--deactivated": book.deactivated}, "table__row--modifiedAt")}
+              className={classnames(
+                { "table__rows--deactivated": book.deactivated },
+                "table__row--modifiedAt"
+              )}
               data-label="Modified"
             >
               {book.modifiedAt}
             </td>
             <td className="table__row--actions">
-                <button
-                  className="table__row--editButton"
-                  onClick={() => handleEditBook(book)}>edit
-                </button>
+              <button
+                className="table__row--editButton"
+                onClick={() => handleEditBook(book)}
+              >
+                edit
+              </button>
 
-                <button
+              <button
                 className={classnames(
                   { "table__row--actButtonDeact": !book.deactivated },
                   "table__row--actButton"
                 )}
-                  onClick={() => handleStatusBook(book)}>
-                    {book.deactivated ? 're-activate' : 'deactivate'}
-                </button>
+                onClick={() => handleStatusBook(book)}
+              >
+                {book.deactivated ? "re-activate" : "deactivate"}
+              </button>
 
-                <button
-                  className={classnames(
-                    { "table__row--delButtonDeact": !book.deactivated },
-                    "table__row--delButton"
-                  )}
-                  onClick={() => handleDeleteClick(book)}>delete
-                </button>
+              <button
+                className={classnames(
+                  { "table__row--delButtonDeact": !book.deactivated },
+                  "table__row--delButton"
+                )}
+                onClick={() => handleDeleteClick(book)}
+              >
+                delete
+              </button>
             </td>
           </tr>
         ))}
@@ -187,4 +211,3 @@ export const Table = ({ booksFiltered, actionBooks, setPopupAction, popupAction,
     </table>
   );
 };
-

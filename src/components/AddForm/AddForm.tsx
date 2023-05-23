@@ -16,14 +16,6 @@ type Props = {
   setShowPopup: (s: boolean) => void;
 };
 
-// interface FormData {
-//   id: number;
-//   name: string;
-//   author: string;
-//   category: string;
-//   isbn: string;
-// }
-
 export const AddForm = ({
   actionBooks,
   setPopupAction,
@@ -52,7 +44,8 @@ export const AddForm = ({
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (formData.name.trim() !== "" && 
+    if (
+      formData.name.trim() !== "" &&
       formData.author.trim() !== "" &&
       formData.category.trim() !== "" &&
       formData.isbn.trim() !== ""

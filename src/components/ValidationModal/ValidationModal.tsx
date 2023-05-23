@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -23,7 +22,11 @@ export const ValidationModal = ({ setValidationModal }: Props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <button className="validation-button" type="submit" onClick={handleConfirm}>
+        <button
+          className="validation-button"
+          type="submit"
+          onClick={handleConfirm}
+        >
           OK
         </button>
       </DialogActions>

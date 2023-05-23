@@ -9,27 +9,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FilteredBy } from "../../types/Filters";
 
 type Props = {
-  actionBooks: (a: string, b: Book) => void,
-  booksFromServer: Book[],
-  booksFiltered: Book[],
-  setFilter: (s: string) => void,
-  filter: string,
-  setPopupAction: (s: string) => void,
-  popupAction: string,
-  showPopup: boolean,
-  setShowPopup: (s: boolean) => void,
+  actionBooks: (a: string, b: Book) => void;
+  booksFromServer: Book[];
+  booksFiltered: Book[];
+  setFilter: (s: string) => void;
+  filter: string;
+  setPopupAction: (s: string) => void;
+  popupAction: string;
+  showPopup: boolean;
+  setShowPopup: (s: boolean) => void;
 };
 
-export const Home = ({ 
-  actionBooks, 
-  booksFiltered, 
+export const Home = ({
+  actionBooks,
+  booksFiltered,
   booksFromServer,
-  setFilter, 
+  setFilter,
   filter,
   setPopupAction,
   popupAction,
   showPopup,
-  setShowPopup 
+  setShowPopup,
 }: Props) => {
   const myRef = useRef<HTMLDivElement>(null);
 
@@ -68,28 +68,35 @@ export const Home = ({
         <Link to={"/books/add"} className="home__addbutton">
           <AddButton />
         </Link>
-      <div className="filter">
-        <select
-          className="filter__selector"
-          value={filter}
-          onChange={(event) => {
-            setFilter(event.target.value)
-            event.target.blur();
-          }}
-        >
+        <div className="filter">
+          <select
+            className="filter__selector"
+            value={filter}
+            onChange={(event) => {
+              setFilter(event.target.value);
+              event.target.blur();
+            }}
+          >
             <option value={FilteredBy.ACTIVE}>Show active</option>
             <option value={FilteredBy.ALL}>Show all</option>
             <option value={FilteredBy.DEACTIVATED}>Show deactivated</option>
           </select>
           <div className="filter__quantity">{numberOfBooks}</div>
-      </div>
+        </div>
 
         <div ref={nextSectionRef}>
-           <Table booksFiltered={booksFiltered} actionBooks={actionBooks} setPopupAction={setPopupAction} popupAction={popupAction} showPopup={showPopup} setShowPopup={setShowPopup}/>
+          <Table
+            booksFiltered={booksFiltered}
+            actionBooks={actionBooks}
+            setPopupAction={setPopupAction}
+            popupAction={popupAction}
+            showPopup={showPopup}
+            setShowPopup={setShowPopup}
+          />
         </div>
       </div>
       <div className="footer">
-        <a 
+        <a
           href="https://github.com/KrisMakarovska"
           className="footer__title"
           rel="noreferrer"

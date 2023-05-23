@@ -3,41 +3,47 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { BackArrow } from "../BackArrow/BackArrow";
 
-import { editBook } from '../../api/requests';
+import { editBook } from "../../api/requests";
 import { Book, PatchBook } from "../../types/Book";
 import { formatBookTimeData } from "../../utils/convertToFormattedTime";
 
 type Props = {
-  actionBooks: (a: string, b: Book) => void,
-  setShowPopup: (s: boolean) => void,
+  actionBooks: (a: string, b: Book) => void;
+  setShowPopup: (s: boolean) => void;
   setPopupAction: (a: string) => void;
 };
 
-export const EditForm = ({ actionBooks, setShowPopup, setPopupAction }: Props) => {
+export const EditForm = ({
+  actionBooks,
+  setShowPopup,
+  setPopupAction,
+}: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [editedBook, setEditedBook] = useState<Book>(location.state?.book);
   const [disabledButton, setDisabledButton] = useState(false);
 
+  const { id, name, author, category, isbn } = editedBook;
+
   useEffect(() => {
     setEditedBook(location.state?.book);
   }, [location]);
 
   useEffect(() => {
-    if (name.trim() !== '' && author.trim() !== '' && isbn.trim() !== '') {
+    if (name.trim() !== "" && author.trim() !== "" && isbn.trim() !== "") {
       setDisabledButton(false);
     } else {
       setDisabledButton(true);
     }
   }, [editedBook]);
 
-  const { id, name, author, category, isbn } = editedBook;
-
-  const handleInputChanges = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChanges = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     if (editedBook !== null) {
       const { name, value } = event.target;
-      setEditedBook((prevBookData) => ({ ...prevBookData, [name]: value }))
+      setEditedBook((prevBookData) => ({ ...prevBookData, [name]: value }));
     }
   };
 
@@ -56,16 +62,15 @@ export const EditForm = ({ actionBooks, setShowPopup, setPopupAction }: Props) =
         modifiedAt: `${utcDateTime}`,
       };
 
-      editBook(id, editData)
-        .then((data: any) => {
-          setPopupAction('edited');
-            setShowPopup(true);
-            setTimeout(() => {
-              setShowPopup(false)
-            }, 2000);
-          const formatedBookTime = formatBookTimeData(data);
-          actionBooks("edit", formatedBookTime);
-        });
+      editBook(id, editData).then((data: any) => {
+        setPopupAction("edited");
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 2000);
+        const formatedBookTime = formatBookTimeData(data);
+        actionBooks("edit", formatedBookTime);
+      });
     }
 
     navigate("/books/#bottom");
@@ -104,7 +109,7 @@ export const EditForm = ({ actionBooks, setShowPopup, setPopupAction }: Props) =
 
               <select
                 className="form__field"
-                required 
+                required
                 // placeholder="Choose category"
                 name="category"
                 value={category}
@@ -113,15 +118,9 @@ export const EditForm = ({ actionBooks, setShowPopup, setPopupAction }: Props) =
                 <option value="" disabled>
                   Choose category
                 </option>
-                <option value="fiction">
-                  fiction
-                </option>
-                <option value="comedy">
-                  comedy
-                </option>
-                <option value="novel">
-                  novel
-                </option>
+                <option value="fiction">fiction</option>
+                <option value="comedy">comedy</option>
+                <option value="novel">novel</option>
               </select>
 
               <input
